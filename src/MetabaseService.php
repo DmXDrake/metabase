@@ -58,9 +58,9 @@ class MetabaseService
             ->builder();
 
         if ($dashboard) {
-            $builder->withClaim('resource', ['dashboard' => $dashboard]);
+           $builder = $builder->withClaim('resource', ['dashboard' => $dashboard]);
         } elseif ($question) {
-            $builder->withClaim('resource', ['question' => $question]);
+            $builder = $builder->withClaim('resource', ['question' => $question]);
             $this->type = 'question';
         } else {
             throw new InvalidArgumentException('Dashboard or question must be specified');
@@ -70,7 +70,7 @@ class MetabaseService
         if (empty($params)) {
             $params = (object) $params;
         }
-        $builder->withClaim('params', $params);
+        $builder = $builder->withClaim('params', $params);
 
         $token = $builder
             ->getToken($config->signer(), $config->signingKey())
